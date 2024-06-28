@@ -44,9 +44,7 @@
                 "log_stream_name": "{instance_id}_{hostname}",
                 "timezone": "Local"
               }
-            ]
-          }
-        },
 		"log_stream_name": "/ec2/catchall"
       }
     }
+	      
