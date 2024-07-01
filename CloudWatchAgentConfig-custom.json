@@ -20,15 +20,12 @@
           },
           "swap": {
             "measurement": [
-              "swap_used",
-              "swap_free",
-              "swap_used_percent"
+              "swap_used"
             ]
           },
           "mem": {
             "measurement": [
               "mem_used",
-              "mem_cached",
               "mem_total"
             ],
             "metrics_collection_interval": 10
