@@ -32,13 +32,6 @@
               "mem_total"
             ],
             "metrics_collection_interval": 10
-          },
-          "processes": {
-            "measurement": [
-              "running",
-              "sleeping",
-              "dead"
-            ]
           }
         },
         "append_dimensions": {
