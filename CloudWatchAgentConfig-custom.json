@@ -7,6 +7,7 @@
         "metrics_collected": {
           "disk": {
         "measurement": [
+		  "total"
           "used_percent"
         ],
         "resources": [
@@ -25,7 +26,7 @@
 			  "mem_used",
               "mem_used_percent"
             ],
-            "metrics_collection_interval": 30
+            "metrics_collection_interval": 10
           }
         },
         "append_dimensions": {
