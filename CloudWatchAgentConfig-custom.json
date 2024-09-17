@@ -7,7 +7,7 @@
         "metrics_collected": {
           "disk": {
         "measurement": [
-		  "total"
+		  "total",
           "used_percent"
         ],
         "resources": [
