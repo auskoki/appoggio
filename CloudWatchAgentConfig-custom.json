@@ -25,7 +25,7 @@
 			  "mem_used",
               "mem_used_percent"
             ],
-            "metrics_collection_interval": 10
+            "metrics_collection_interval": 30
           }
         },
         "append_dimensions": {
