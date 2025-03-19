@@ -1,0 +1,145 @@
+#cloud-config
+autoinstall:
+  version: 1
+  apt:
+    geoip: true
+    preserve_sources_list: false
+    primary:
+    - arches: [amd64, i386]
+      uri: http://archive.ubuntu.com/ubuntu
+    - arches: [default]
+      uri: http://ports.ubuntu.com/ubuntu-ports
+  packages:
+     - network-manager
+  ssh:
+    allow-pw: true
+    install-server: true
+  locale: en_US
+  keyboard:
+    layout: it
+  storage:
+     swap:
+        size: 8G
+     config:
+       - id: disk-sda
+         type: disk
+         grub_device: true
+         name: ""
+         path: /dev/sda
+         match:
+           size: largest
+         preserve: false
+         ptable: gpt
+       - id: partition-0
+         type: partition
+         device: disk-sda
+         flag: bios_grub
+         number: 1
+         preserve: false
+         size: 1048576
+       - id: partition-1
+         type: partition
+         device: disk-sda
+         flag: ""
+         number: 2
+         preserve: false
+         size: 1073741824
+         wipe: superblock
+       - id: partition-2
+         type: partition
+         device: disk-sda
+         number: 3
+         preserve: false
+         flag: ""
+         size: -1
+         wipe: superblock
+       - id: rootvg
+         type: lvm_volgroup
+         devices:
+           - partition-2
+         name: rootvg
+         preserve: false
+       - id: rootlv
+         type: lvm_partition
+         name: root
+         preserve: false
+         size: 30G
+         volgroup: rootvg
+       - id: homelv
+         type: lvm_partition
+         name: homelv
+         preserve: false
+         size: 5G
+         volgroup: rootvg
+       - id: tmplv
+         type: lvm_partition
+         name: tmplv
+         preserve: false
+         size: 10G
+         volgroup: rootvg
+       - id: varlv
+         type: lvm_partition
+         name: varlv
+         preserve: false
+         size: 20G
+         volgroup: rootvg
+       - id: optlv
+         type: lvm_partition
+         name: optlv
+         preserve: false
+         size: 5G
+         volgroup: rootvg
+       - id: format-0
+         type: format
+         fstype: ext4
+         preserve: false
+         volume: partition-1
+       - id: format-1
+         type: format
+         fstype: xfs
+         preserve: false
+         volume: rootlv
+       - id: format-2
+         type: format
+         fstype: xfs
+         preserve: false
+         volume: homelv
+       - id: format-3
+         type: format
+         fstype: xfs
+         preserve: false
+         volume: tmplv
+       - id: format-4
+         type: format
+         fstype: xfs
+         preserve: false
+         volume: varlv
+       - id: format-5
+         type: format
+         fstype: xfs
+         preserve: false
+         volume: optlv
+       - id: mount-0
+         type: mount
+         device: format-0
+         path: /boot
+       - id: mount-1
+         type: mount
+         device: format-1
+         path: /
+       - id: mount-2
+         type: mount
+         device: format-2
+         path: /home
+       - id: mount-3
+         type: mount
+         device: format-3
+         path: /tmp
+       - id: mount-4
+         type: mount
+         device: format-4
+         path: /var
+       - id: mount-5
+         type: mount
+         device: format-5
+         path: /opt
