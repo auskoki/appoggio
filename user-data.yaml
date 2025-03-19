@@ -25,7 +25,7 @@ autoinstall:
          type: disk
          grub_device: true
          name: ""
-         path: /dev/sda
+         path: /dev/vda
          match:
            size: largest
          preserve: false
